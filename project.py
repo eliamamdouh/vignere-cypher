@@ -1,7 +1,7 @@
 import re
 import string
 
-alphabets = "abcdefghijklmnopqrstuvwxyz" # this is the english letters
+alphabets = "abcdefghijklmnopqrstuvwxyzAB" # this is the english letters
 def encrypt(p, k):
     c = ""
     kpos = [] # return the index of characters ex: if k='d' then kpos= 3
@@ -16,7 +16,7 @@ def encrypt(p, k):
       print(pos)
       if pos > 25:
           pos = pos-26               # check you exceed the limit
-      c += alphabets[pos].capitalize()  #because the cipher text always capital letters
+      c += alphabets[pos]  #because the cipher text always capital letters
       i +=1
     return c
 
