@@ -1,9 +1,7 @@
 
 from logging import exception
-import re
-import string
 
-alphabets = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" 
+alphabets = "abcdefghijklmnopqrstuvwxyz0123456789!#$%&'()*+,-./:;<=>?@[\]^_`{|}~" 
 def encrypt(p, k):
     c = ""
     kpos = [] # return the index of characters ex: if k='d' then kpos= 3
@@ -16,8 +14,8 @@ def encrypt(p, k):
           i = 0
       pos = alphabets.find(x) + kpos[i] #find the number or index of the character and perform the shift with the key
       print(pos)
-      if pos > 62:
-          pos = pos-63               # check you exceed the limit
+      if pos > 66:
+          pos = pos-67              # check you exceed the limit
       c += alphabets[pos] 
       i +=1
     return c
@@ -33,7 +31,7 @@ def decrypt(c, k):
           i = 0
       pos = alphabets.find(x) - kpos[i]
       if pos < 0:
-          pos = pos + 63
+          pos = pos + 36
       p += alphabets[pos]
       i +=1
     return p
@@ -44,6 +42,7 @@ try:
     choose = input("Choice: ")
     if choose == '1':
        p = input("enter the plain text: ")
+       p = p.replace(" ", "") 
        k = input("enter the key:")
        if k.isalpha():
         c = encrypt(p,k)
@@ -54,6 +53,7 @@ try:
        
     elif choose == '2':
         c = input("enter the cipher text: ")
+        c = c.replace(" ","")
         k = input("enter the key:")
         if not k.isalpha():
             print("enter valid key,key is only one word ")
