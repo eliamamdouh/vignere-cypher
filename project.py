@@ -1,7 +1,7 @@
 
 from logging import exception
 
-alphabets = "abcdefghijklmnopqrstuvwxyz0123456789!#$%&'()*+,-./:;<=>?@[\]^_`{|}~" 
+alphabets = "abcdefghijklmnopqrstuvwxyz0123456789!#$%&'()*+,-./:;<=>?@[\]^_`{|}~" #characters used
 def encrypt(p, k):
     c = ""
     kpos = [] # return the index of characters ex: if k='d' then kpos= 3
@@ -15,7 +15,7 @@ def encrypt(p, k):
       pos = alphabets.find(x) + kpos[i] #find the number or index of the character and perform the shift with the key
       print(pos)
       if pos > 66:
-          pos = pos-67              # check you exceed the limit
+          pos = pos-67 # check you exceed the limit
       c += alphabets[pos] 
       i +=1
     return c
@@ -31,7 +31,7 @@ def decrypt(c, k):
           i = 0
       pos = alphabets.find(x) - kpos[i]
       if pos < 0:
-          pos = pos + 36
+          pos = pos + 67
       p += alphabets[pos]
       i +=1
     return p
@@ -42,7 +42,7 @@ try:
     choose = input("Choice: ")
     if choose == '1':
        p = input("enter the plain text: ")
-       p = p.replace(" ", "") 
+       p = p.replace(" ", "") #remouve the white spaces between the words if any
        k = input("enter the key:")
        if k.isalpha():
         c = encrypt(p,k)
@@ -55,13 +55,13 @@ try:
         c = input("enter the cipher text: ")
         c = c.replace(" ","")
         k = input("enter the key:")
-        if not k.isalpha():
+        if not k.isalpha():#isaplha check if the input is only letters
             print("enter valid key,key is only one word ")
         else:
             p = decrypt (c,k)
             print("the plain text is:",p)
     else:
-        print("please enter a valid choise")
+        print("please enter a valid choice")
 except exception as e:
     print(e)
     exit("enter a valid text please")
