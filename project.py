@@ -1,7 +1,7 @@
 
 from logging import exception
 
-alphabets = "abcdefghijklmnopqrstuvwxyz0123456789!#$%&'()*+,-./:;<=>?@[\]^_`{|}~" #characters used
+alphabets = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&'()*+,-./:;<=>?@[\]^_`{|}~" #characters used
 def encrypt(p, k):
     c = ""
     kpos = [] # return the index of characters ex: if k='d' then kpos= 3
@@ -14,8 +14,8 @@ def encrypt(p, k):
           i = 0
       pos = alphabets.find(x) + kpos[i] #find the number or index of the character and perform the shift with the key
       print(pos)
-      if pos > 66:
-          pos = pos-67 # check you exceed the limit
+      if pos > 92:
+          pos = pos-93 # check you exceed the limit
       c += alphabets[pos] 
       i +=1
     return c
@@ -31,7 +31,7 @@ def decrypt(c, k):
           i = 0
       pos = alphabets.find(x) - kpos[i]
       if pos < 0:
-          pos = pos + 67
+          pos = pos + 93
       p += alphabets[pos]
       i +=1
     return p
