@@ -1,7 +1,9 @@
+
+from logging import exception
 import re
 import string
 
-alphabets = "abcdefghijklmnopqrstuvwxyzAB" # this is the english letters
+alphabets = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" 
 def encrypt(p, k):
     c = ""
     kpos = [] # return the index of characters ex: if k='d' then kpos= 3
@@ -14,9 +16,9 @@ def encrypt(p, k):
           i = 0
       pos = alphabets.find(x) + kpos[i] #find the number or index of the character and perform the shift with the key
       print(pos)
-      if pos > 25:
-          pos = pos-26               # check you exceed the limit
-      c += alphabets[pos]  #because the cipher text always capital letters
+      if pos > 62:
+          pos = pos-63               # check you exceed the limit
+      c += alphabets[pos] 
       i +=1
     return c
 
@@ -29,49 +31,37 @@ def decrypt(c, k):
     for x in c:
       if i == len(kpos):
           i = 0
-      pos = alphabets.find(x.lower()) - kpos[i]
+      pos = alphabets.find(x) - kpos[i]
       if pos < 0:
-          pos = pos + 26
-      p += alphabets[pos].lower()
+          pos = pos + 63
+      p += alphabets[pos]
       i +=1
     return p
 try:
     print("Welcome to vigenere cipher.\n\n"
-          "The text message should contain only characters and the key should be one character word \n"
+          "The text message should contain CHARACTERS AND NUMBERS and the key should be one character word \n"
           "Press 1 to Enrypt a message \npress 2 to Decrypt a message")
     choose = input("Choice: ")
     if choose == '1':
        p = input("enter the plain text: ")
-       p = p.replace(" ", "")  # this will make sure that there is no space in the message
-       if p.isalpha():
-           k = input("Enter the key: ")
-           k = k.strip()  # remove the white spaces from both sides
-           if k.isalpha():
-              # print(k)
-               c = encrypt(p, k)
-               print("The cipher text is: ", c)
-
-           else:
-               print(k)
-               print("Enter valid key, key is only one character word!")
+       k = input("enter the key:")
+       if k.isalpha():
+        c = encrypt(p,k)
+        print("the cipher text is",c)
        else:
-           print("only letters are allowed !!")
-
+        print(k)
+        print("enter valid key,key is only one character word")
+       
     elif choose == '2':
         c = input("enter the cipher text: ")
-        c = c.replace(" ", "")
-        if c.isalpha():
-            k = input("Enter the key: ")
-            if not k.isalpha():
-                print("Enter valid key, key is only one character word!")
-            else:
-                p = decrypt(c, k)
-                print("The plain text is: ", p)
+        k = input("enter the key:")
+        if not k.isalpha():
+            print("enter valid key,key is only one word ")
         else:
-            print("only letters are allowed!")
-
+            p = decrypt (c,k)
+            print("the plain text is:",p)
     else:
-        print("Please enter a valid choice!")
-except Exception as e:
+        print("please enter a valid choise")
+except exception as e:
     print(e)
-    exit("Enter a valid text please! ")
+    exit("enter a valid text please")
