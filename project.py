@@ -42,9 +42,9 @@ try:
     choose = input("Choice: ")
     if choose == '1':
        p = input("enter the plain text: ") #the text that will be encrypted
-       p = p.replace(" ", "") #remouve the white spaces between the words if any
+       p = p.replace(" ", "") #remove the white spaces between the words if any
        k = input("enter the key:")
-       if k.isalpha(): #check that the key is only one word and lettes only
+       if k.isalpha(): #check that the key is only one word and letters only
         c = encrypt(p,k)
         print("the cipher text is",c)
        else:
@@ -63,7 +63,7 @@ try:
 
     elif choose == "3":
        f = input("enter the file name:")#choose the name of the text file that will contain the encrypted text
-       f = f.replace(" ", "") # to remouve the white spaces 
+       f = f.replace(" ", "") # to remove the white spaces 
        o = input("enter the plain text: ")
        o = o.replace(" ", "")
        k = input("enter the key:")
