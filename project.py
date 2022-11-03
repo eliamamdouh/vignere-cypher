@@ -1,22 +1,22 @@
 
 from logging import exception
 
-alphabets = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&'()*+,-./:;<=>?@[\]^_`{|}~" #characters used
+CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&'()*+,-./:;<=>?@[\]^_`{|}~" #characters used
 def encrypt(p, k):
     c = ""
     kpos = [] # return the index of characters ex: if k='d' then kpos= 3
     for x in k:
        # kpos += alphabets.find(x) #change the int value to string
-        kpos.append(alphabets.find(x))
+        kpos.append(CHARACTERS.find(x))
     i = 0
     for x in p:
       if i == len(kpos):
           i = 0
-      pos = alphabets.find(x) + kpos[i] #find the number or index of the character and perform the shift with the key
+      pos = CHARACTERS.find(x) + kpos[i] #find the number or index of the character and perform the shift with the key
       print(pos)
       if pos > 92:
           pos = pos-93 # check you exceed the limit
-      c += alphabets[pos] 
+      c += CHARACTERS[pos] 
       i +=1
     return c
 
@@ -24,15 +24,15 @@ def decrypt(c, k):
     p = ""
     kpos = []
     for x in k:
-        kpos.append(alphabets.find(x))
+        kpos.append(CHARACTERS.find(x))
     i = 0
     for x in c:
       if i == len(kpos):
           i = 0
-      pos = alphabets.find(x) - kpos[i]
+      pos = CHARACTERS.find(x) - kpos[i]
       if pos < 0:
           pos = pos + 93
-      p += alphabets[pos]
+      p += CHARACTERS[pos]
       i +=1
     return p
 try:
@@ -41,10 +41,10 @@ try:
           " Press 1 to Enrypt a message \n press 2 to Decrypt a message\n press 3 to encrypt through a file \n press 4 to decrypt through a file")
     choose = input("Choice: ")
     if choose == '1':
-       p = input("enter the plain text: ")
+       p = input("enter the plain text: ") #the text that will be encrypted
        p = p.replace(" ", "") #remouve the white spaces between the words if any
        k = input("enter the key:")
-       if k.isalpha():
+       if k.isalpha(): #check that the key is only one word and lettes only
         c = encrypt(p,k)
         print("the cipher text is",c)
        else:
@@ -62,12 +62,12 @@ try:
             print("the plain text is:",p)
 
     elif choose == "3":
-       f = input("enter the file name:")# open the file using open() function
-       f = f.replace(" ", "")
+       f = input("enter the file name:")#choose the name of the text file that will contain the encrypted text
+       f = f.replace(" ", "") # to remouve the white spaces 
        o = input("enter the plain text: ")
        o = o.replace(" ", "")
        k = input("enter the key:")
-       file = open(f,"w")# Overwrite the file
+       file = open(f,"w")# open the file using open() function
        file.write(encrypt(o,k))
        if k.isalpha():
         c = encrypt(o,k)
@@ -76,12 +76,12 @@ try:
         print(k)
         print("enter valid key,key is only one character word")
     elif choose == "4":
-         f = input("enter the file name:")# open the file using open() function
+         f = input("enter the file name:") #choose the name of the text file that will contain the decrypted text
          f = f.replace(" ", "")
          c = input("enter the encrypted text: ")
          c = c.replace(" ", "")
          k = input("enter the key:")
-         file = open(f,"w")# Overwrite the file
+         file = open(f,"w")# Overwrite the file ,# open the file using open() function
          file.write(decrypt(c,k))
          if not k.isalpha():#isaplha check if the input is only letters
             print("enter valid key,key is only one word ")
